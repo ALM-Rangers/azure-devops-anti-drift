@@ -22,11 +22,13 @@ steps:
   inputs:
     arguments: '--configuration $(buildConfiguration)'
     command: build
+    workingDirectory: $(Build.SourcesDirectory)/src
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
     arguments: '--configuration $(buildConfiguration)'
     command: test
+    workingDirectory: $(Build.SourcesDirectory)/src
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
