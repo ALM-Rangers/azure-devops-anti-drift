@@ -1,0 +1,12 @@
+Team Projects:
+- Key: 00001 # Key is used to generate the security group
+  Name: Team Project 1
+  Patterns: 
+  - !Security
+    Name: Default # References the Default security pattern
+  Agent Pools:
+  - linux
+  - windows
+  Status: Active # Active, Archived (meaning still available but readonly), Removed.
+  Teams:
+  - Team 1 # References Team 1 from the teams section
