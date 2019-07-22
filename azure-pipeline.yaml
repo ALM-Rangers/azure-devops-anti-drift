@@ -20,19 +20,19 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration)' -p:Version=$(Build.BuildNumber)
     command: build
     workingDirectory: $(Build.SourcesDirectory)/src
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration)' -p:Version=$(Build.BuildNumber)
     command: test
     workingDirectory: $(Build.SourcesDirectory)/src
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactstagingDirectory) -r rhel.7.4-x64'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactstagingDirectory) -r rhel.7.4-x64' -p:Version=$(Build.BuildNumber)
     command: publish
     publishWebProjects: false
     zipAfterPublish: false
