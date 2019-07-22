@@ -9,11 +9,33 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  variables:
+    buildConfiguration: 'Release'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+steps:
+- task: GitVersion@5
+  inputs:
+    runtime: 'core'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    arguments: '--configuration $(buildConfiguration)'
+    command: build
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    arguments: '--configuration $(buildConfiguration)'
+    command: test
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactstagingDirectory) -r rhel.7.4-x64'
+    command: publish
+    publishWebProjects: false
+    zipAfterPublish: false
+    workingDirectory: $(Build.SourcesDirectory)/src/drift
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.ArtifactstagingDirectory)'
