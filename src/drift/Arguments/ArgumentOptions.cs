@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace rangers.antidrift.drift.Arguments
+namespace Rangers.Antidrift.Drift.Arguments
 {
     public class ArgumentOptions
     {

@@ -1,9 +1,10 @@
-﻿namespace rangers.antidrift.drift.Arguments
+﻿namespace Rangers.Antidrift.Drift.Arguments
 {
     public enum AuthType
     {
         Pat,
         Basic,
-        Ntlm
+        Ntlm,
+        Interactive
     }
 }

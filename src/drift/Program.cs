@@ -1,11 +1,12 @@
 ﻿using CommandLine;
+using Microsoft.VisualStudio.Services.Client;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.WebApi;
-using rangers.antidrift.drift.Arguments;
+using Rangers.Antidrift.Drift.Arguments;
 using System;
 using System.Threading.Tasks;
 
-namespace rangers.antidrift.drift
+namespace Rangers.Antidrift.Drift
 {
     class Program
     {
@@ -40,6 +41,11 @@ namespace rangers.antidrift.drift
                     break;
                 case AuthType.Ntlm:
                     credentials = new VssCredentials();
+                    break;
+                case AuthType.Interactive:
+                    credentials = new VssClientCredentials(new WindowsCredential(false),
+                                    new VssFederatedCredential(false),
+                                    CredentialPromptType.PromptIfNeeded);
                     break;
                 default:
                     break;
