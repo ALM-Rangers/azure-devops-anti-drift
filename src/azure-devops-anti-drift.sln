@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift", "drift\drift.csproj", "{97E5FD63-0EE8-4AFF-A372-B17B88080F20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift", "drift\drift.csproj", "{97E5FD63-0EE8-4AFF-A372-B17B88080F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.tests", "drift.tests\drift.tests.csproj", "{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{97E5FD63-0EE8-4AFF-A372-B17B88080F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E5FD63-0EE8-4AFF-A372-B17B88080F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E5FD63-0EE8-4AFF-A372-B17B88080F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
