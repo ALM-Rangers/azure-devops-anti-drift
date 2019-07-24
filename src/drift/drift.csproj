@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Rangers.Antidrift.Drift</AssemblyName>
+    <RootNamespace>Rangers.Antidrift.Drift</RootNamespace>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.5.0" />
+    <PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="16.143.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Services.InteractiveClient" Version="16.143.2" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,43 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: GitVersion@5
+  inputs:
+    runtime: 'core'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
+    command: build
+    workingDirectory: $(Build.SourcesDirectory)/src
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
+    command: test
+    workingDirectory: $(Build.SourcesDirectory)/src
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    arguments: --configuration $(buildConfiguration) --output $(Build.ArtifactstagingDirectory) -r rhel.7.4-x64 -p:Version=$(Build.BuildNumber)
+    command: publish
+    publishWebProjects: false
+    zipAfterPublish: false
+    workingDirectory: $(Build.SourcesDirectory)/src/drift
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'drop'
+    targetPath: '$(Build.ArtifactstagingDirectory)'
