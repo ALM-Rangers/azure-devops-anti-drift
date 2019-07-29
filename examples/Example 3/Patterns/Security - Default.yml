@@ -1,0 +1,31 @@
+Patterns:
+- !Security # Exclamation mark is not actual yaml, but the yaml library understands it as inheritance, parent is pattern
+  Name: Default
+  Application Groups:
+  - Name: Contributor
+    Members: Security Group {0} # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Project
+      Allow:
+      - Create tag definition
+      - Create test runs
+      - Edit build quality
+      - Edit project-level information
+      - Manage project properties
+      - Manage test configurations
+      - Manage test environments
+      - Move work items out of this project
+      - Start a build
+      - Suppress notifications for work item updates
+      - View analytics
+      - View project-level information
+      - View test runs
+      - Write to build operational store
+      Deny:
+      - Bypass rules on work item updates
+      - Change process of team project.
+      - Delete and restore work items
+      - Delete team project
+      - Delete test runs
+      - Update project visibility
+      - Write to build operational store
