@@ -1,4 +1,4 @@
-namespace Rangers.Antidrift.Drift
+namespace Rangers.Antidrift.Drift.Core
 {
     public class Pattern
     {
