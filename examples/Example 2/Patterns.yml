@@ -3,7 +3,8 @@ Patterns:
   Name: Default
   Application Groups:
   - Name: Contributor
-    Members: Security Group {0} # {0} will be replaced with a key using a string.format
+    Members: 
+    - Security Group {0} # {0} will be replaced with a key using a string.format
     Namespaces:
     - Name: Project
       Allow:
