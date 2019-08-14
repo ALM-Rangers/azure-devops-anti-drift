@@ -12,5 +12,17 @@ namespace Rangers.Antidrift.Drift.Core
         public IList<TeamProject> TeamProjects { get; set; } = new List<TeamProject>();
 
         public IList<Team> Teams { get; set; } = new List<Team>();
+
+        public string GenerateDriftReport()
+        {
+            var result = string.Empty;
+
+            foreach (var tp in this.TeamProjects)
+            {
+                result += tp.GenerateDriftReport();
+            }
+
+            return result;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Rangers.Antidrift.Drift.Core
@@ -15,5 +16,17 @@ namespace Rangers.Antidrift.Drift.Core
         public IList<Team> Teams { get; set; } = new List<Team>();
 
         public TeamProjectStatus Status { get; set; } = TeamProjectStatus.Active;
+
+        public string GenerateDriftReport()
+        {
+            var result = string.Empty;
+
+            foreach (var pattern in this.Patterns)
+            {
+                result += pattern.GenerateDriftReport(this);
+            }
+
+            return result;
+        }
     }
 }

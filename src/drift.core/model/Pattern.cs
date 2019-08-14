@@ -1,7 +1,11 @@
+using System;
+
 namespace Rangers.Antidrift.Drift.Core
 {
-    public class Pattern
+    public abstract class Pattern
     {
         public string Name { get; set; }
+
+        public abstract string GenerateDriftReport(TeamProject teamProject);
     }
 }
