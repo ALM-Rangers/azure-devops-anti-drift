@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Rangers.Antidrift.Drift.Core
 {
@@ -17,16 +19,18 @@ namespace Rangers.Antidrift.Drift.Core
 
         public TeamProjectStatus Status { get; set; } = TeamProjectStatus.Active;
 
-        public string GenerateDriftReport()
+        public async Task<IEnumerable<Deviation>> CollectDeviations()
         {
-            var result = string.Empty;
+            var tasks = new List<Task<IEnumerable<Deviation>>>();
 
             foreach (var pattern in this.Patterns)
             {
-                result += pattern.GenerateDriftReport(this);
+                 var task = pattern.CollectDeviations(this);
+                 tasks.Add(task);
             }
 
-            return result;
+            var results = await Task.WhenAll(tasks);
+            return results.SelectMany(r => r);
         }
     }
 }

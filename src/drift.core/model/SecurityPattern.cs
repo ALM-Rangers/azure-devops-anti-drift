@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Rangers.Antidrift.Drift.Core
 {
@@ -6,16 +7,16 @@ namespace Rangers.Antidrift.Drift.Core
     {
         public IList<ApplicationGroup> ApplicationGroups { get; set; } = new List<ApplicationGroup>();
 
-        public override string GenerateDriftReport(TeamProject teamProject)
+        public async override Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
         {
-            var result = string.Empty;
+            var results = new List<Deviation>();
 
             foreach (var applicationGroup in this.ApplicationGroups)
             {
                 
             }
 
-            return result;
+            return results;
         }
     }
 }

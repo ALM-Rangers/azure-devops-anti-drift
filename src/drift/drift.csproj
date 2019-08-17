@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Rangers.Antidrift.Drift</AssemblyName>
     <RootNamespace>Rangers.Antidrift.Drift</RootNamespace>
     <LangVersion>latest</LangVersion>

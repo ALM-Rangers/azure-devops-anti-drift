@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Rangers.Antidrift.Drift.Core
 {
@@ -6,6 +8,6 @@ namespace Rangers.Antidrift.Drift.Core
     {
         public string Name { get; set; }
 
-        public abstract string GenerateDriftReport(TeamProject teamProject);
+        public abstract Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject);
     }
 }
