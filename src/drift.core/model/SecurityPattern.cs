@@ -9,7 +9,7 @@ namespace Rangers.Antidrift.Drift.Core
 
         public async override Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
         {
-            var results = new List<Deviation>();
+            var results = await base.CollectDeviations(teamProject);
 
             foreach (var applicationGroup in this.ApplicationGroups)
             {

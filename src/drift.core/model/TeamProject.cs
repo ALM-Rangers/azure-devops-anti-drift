@@ -19,7 +19,7 @@ namespace Rangers.Antidrift.Drift.Core
 
         public TeamProjectStatus Status { get; set; } = TeamProjectStatus.Active;
 
-        public async Task<IEnumerable<Deviation>> CollectDeviations()
+        public async virtual Task<IEnumerable<Deviation>> CollectDeviations()
         {
             var tasks = new List<Task<IEnumerable<Deviation>>>();
 

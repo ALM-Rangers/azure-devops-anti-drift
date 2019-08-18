@@ -4,10 +4,13 @@ using System.Threading.Tasks;
 
 namespace Rangers.Antidrift.Drift.Core
 {
-    public abstract class Pattern
+    public class Pattern
     {
         public string Name { get; set; }
 
-        public abstract Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject);
+        public async virtual Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
+        {
+            return await Task.FromResult(new List<Deviation>());
+        }
     }
 }
