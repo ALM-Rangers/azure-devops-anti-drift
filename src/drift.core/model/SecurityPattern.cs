@@ -13,7 +13,9 @@ namespace Rangers.Antidrift.Drift.Core
 
             foreach (var applicationGroup in this.ApplicationGroups)
             {
-                
+                // Check if the application group exists
+                // Check if the application group contains the correct members
+                // Iterate through the namespaces and check the permissions
             }
 
             return results;
