@@ -56,6 +56,8 @@ namespace Rangers.Antidrift.Drift
             try
             {
                 await connection.ConnectAsync();
+
+                // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
             }
             catch (Exception)
             {
