@@ -9,6 +9,8 @@ namespace Rangers.Antidrift.Drift.Core
     {
         public string[] AgentPools { get; set; } = new string[0];
 
+        public Guid Id { get; set; }
+
         public string Key { get; set; }
 
         public string Name { get; set; }

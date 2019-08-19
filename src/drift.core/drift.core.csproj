@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Rangers.Antidrift.Drift.Core</AssemblyName>
+    <RootNamespace>Rangers.Antidrift.Drift.Core</RootNamespace>
   </PropertyGroup>
 
 </Project>

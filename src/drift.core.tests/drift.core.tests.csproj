@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-
+    <AssemblyName>Rangers.Antidrift.Drift.Core.Tests</AssemblyName>
+    <RootNamespace>Rangers.Antidrift.Drift.Core.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
