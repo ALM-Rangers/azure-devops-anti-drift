@@ -19,41 +19,48 @@ namespace Rangers.Antidrift.Drift.Core
         public async override Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
         {
             var results = (await base.CollectDeviations(teamProject)).ToList();
-            var current = await this.graphService.GetApplicationGroups(teamProject);
+            var currentApplicationGroups = await this.graphService.GetApplicationGroups(teamProject);
+
+            // Check if the application group exists
+            var missingApplicationGroupDeviations = this.ApplicationGroups
+                .Where(ag => currentApplicationGroups.All(cag => !cag.Name.Equals(ag.Name, StringComparison.OrdinalIgnoreCase)))
+                .Select(ag => new ApplicationGroupDeviation { ApplicationGroup = ag, TeamProject = teamProject, Type = DeviationType.Missing})
+                .ToList();
+
+            // Check for obsolete application groups.
+            var obsoleteApplicationGroupDeviations = currentApplicationGroups
+                .Where(cag => !cag.IsSpecial)
+                .Where(cag => this.ApplicationGroups.All(ag => !ag.Name.Equals(cag.Name, StringComparison.OrdinalIgnoreCase)))
+                .Select(ag => new ApplicationGroupDeviation { ApplicationGroup = ag, TeamProject = teamProject, Type = DeviationType.Obsolete})
+                .ToList();
 
             foreach (var applicationGroup in this.ApplicationGroups)
             {
-                // Check if the application group exists
-                if(current.All(c => !c.Name.Equals(applicationGroup.Name, StringComparison.OrdinalIgnoreCase)))
-                {
-                    var deviation = new ApplicationGroupDeviation{ ApplicationGroup = applicationGroup, TeamProject = teamProject };
-                    results.Add(deviation);
-                    continue;
-                }
+                var currentMembers = currentApplicationGroups.Any(ag => ag.Name.Equals(applicationGroup.Name, StringComparison.OrdinalIgnoreCase)) 
+                                     ? (await this.graphService.GetMembers(teamProject, applicationGroup)) 
+                                     : new List<string>();
 
                 // Check if the application group contains the correct members
-                var currentMembers = await this.graphService.GetMembers(teamProject, applicationGroup);
+                var missingApplicationGroupMemberDeviations = applicationGroup.Members
+                    .Where(member => currentMembers.All(cm => !cm.Equals(member, StringComparison.OrdinalIgnoreCase)))
+                    .Select(m => new ApplicationGroupMemberDeviation { ApplicationGroup = applicationGroup, Member = m, TeamProject = teamProject, Type = DeviationType.Missing })
+                    .ToList();
 
-                foreach (var member in applicationGroup.Members)
-                {
-                    if(currentMembers.All(c => !c.Equals(member, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        var deviation = new ApplicationGroupMemberDeviation { ApplicationGroup = applicationGroup, Member = member, TeamProject = teamProject, Type = DeviationType.Missing };
-                        results.Add(deviation);
-                    }
-                }
+                // Check for obsolete members
+                var obsoleteApplictionGroupMemberDeviations = currentMembers
+                    .Where(cm => applicationGroup.Members.All(m => !m.Equals(cm, StringComparison.OrdinalIgnoreCase)))
+                    .Select(cm => new ApplicationGroupMemberDeviation { ApplicationGroup = applicationGroup, Member = cm, TeamProject = teamProject, Type = DeviationType.Obsolete })
+                    .ToList();
 
-                foreach (var member in currentMembers)
-                {
-                    if(applicationGroup.Members.All(c => !c.Equals(member, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        var deviation = new ApplicationGroupMemberDeviation { ApplicationGroup = applicationGroup, Member = member, TeamProject = teamProject, Type = DeviationType.Obsolete };
-                        results.Add(deviation);
-                    }
-                }
-                
-                // Iterate through the namespaces and check the permissions
+
+                results.AddRange(missingApplicationGroupMemberDeviations);
+                results.AddRange(obsoleteApplictionGroupMemberDeviations);
+
+                // TODO: Iterate through the namespaces and check the permissions
             }
+
+            results.AddRange(missingApplicationGroupDeviations);
+            results.AddRange(obsoleteApplicationGroupDeviations);
 
             return results;
         }

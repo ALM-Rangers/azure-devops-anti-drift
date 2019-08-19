@@ -13,7 +13,7 @@ namespace Rangers.Antidrift.Drift.Core.Tests
         public async Task CollectDeviations()
         {
             // Arrange
-            var applicationGroup = new ApplicationGroup { Name = "ApplicationGroup", Members = new[] { "Member 1" } };
+            var applicationGroup = new ApplicationGroup { Name = "ApplicationGroup" };
             var graphService = new Mock<IGraphService>();
             var teamProject = new TeamProject();
 
