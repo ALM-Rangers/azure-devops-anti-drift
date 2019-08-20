@@ -37,7 +37,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
-    arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber) --settings build.runsettings
+    arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber) --settings $(Build.SourcesDirectory)/src/build.runsettings
     command: test
     workingDirectory: $(Build.SourcesDirectory)/src
 - task: DotNetCoreCLI@2
