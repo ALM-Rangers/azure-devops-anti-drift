@@ -331,3 +331,6 @@ ASALocalRun/
 
 # Visual Studio Code working folder
 .vscode/
+
+# Custom
+local.runsettings

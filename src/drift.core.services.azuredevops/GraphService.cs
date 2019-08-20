@@ -11,18 +11,16 @@ namespace Rangers.Antidrift.Drift.Core.Services
 {
     public class GraphService : IGraphService
     {
-        private readonly Uri baseUri;
-        private readonly VssCredentials credentials;
+        private readonly VssConnection connection;
 
-        public GraphService(Uri baseUri, VssCredentials credentials)
+        public GraphService(VssConnection connection)
         {
-            this.baseUri = baseUri;
-            this.credentials = credentials;
+            this.connection = connection;
         }
 
         public async Task<IEnumerable<ApplicationGroup>> GetApplicationGroups(TeamProject teamProject)
         {
-            using(var client = new GraphHttpClient(this.baseUri, this.credentials))
+            using(var client = this.connection.GetClient<GraphHttpClient>())
             {
                 var descriptor = await client.GetDescriptorAsync(teamProject.Id);
                 var result = await client.ListGroupsAsync(descriptor.Value);
@@ -35,7 +33,7 @@ namespace Rangers.Antidrift.Drift.Core.Services
 
         public async Task<IEnumerable<string>> GetMembers(TeamProject teamProject, ApplicationGroup applicationGroup)
         {
-            using(var client = new GraphHttpClient(this.baseUri, this.credentials))
+            using(var client = this.connection.GetClient<GraphHttpClient>())
             {
                 var descriptor = await client.GetDescriptorAsync(teamProject.Id);
                 var graphGroups = await client.ListGroupsAsync(descriptor.Value); // TODO: Overhead
@@ -46,9 +44,9 @@ namespace Rangers.Antidrift.Drift.Core.Services
                     throw new Exception($"Cannot get the members fro application group {applicationGroup.Name}. the application group is not available.");
                 }
 
-                var memberships = await client.ListMembershipsAsync(group.Descriptor.Identifier, GraphTraversalDirection.Down);
+                var memberships = await client.ListMembershipsAsync(group.Descriptor.ToString(), GraphTraversalDirection.Down);
                 var lookupKeys = memberships
-                    .Select(m => new GraphSubjectLookupKey(new SubjectDescriptor(string.Empty, m.MemberDescriptor))) // TODO: not sure what to fill in subject type.
+                    .Select(m => new GraphSubjectLookupKey(m.MemberDescriptor)) // TODO: not sure what to fill in subject type.
                     .ToList(); 
 
                 var result = await client.LookupSubjectsAsync(new GraphSubjectLookup(lookupKeys));

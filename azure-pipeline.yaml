@@ -10,13 +10,24 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
+  - name: buildConfiguration 
+    value: 'Release'
+  - group: Antidrift-Build
 
 steps:
 - task: GitVersion@5
   inputs:
     runtime: 'core'
-
+- task: replacetokens@3
+  inputs:
+    rootDirectory: 'src'
+    targetFiles: '**/*.runsettings'
+    encoding: 'auto'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    tokenPrefix: '#{'
+    tokenSuffix: '}#'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:

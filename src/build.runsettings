@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <TestRunParameters>
+    <Parameter name="organization" value="almrangers-sandbox-one" />
+    <Parameter name="pat" value="#{pat}#" />
+  </TestRunParameters>
+</RunSettings>

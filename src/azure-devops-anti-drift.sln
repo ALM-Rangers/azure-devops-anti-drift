@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core.tests", "drift.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core.services.azuredevops", "drift.core.services.azuredevops\drift.core.services.azuredevops.csproj", "{D755547B-7638-493F-8965-40E99B9C1AEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core.services.azuredevops.tests", "drift.core.services.azuredevops.tests\drift.core.services.azuredevops.tests.csproj", "{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D755547B-7638-493F-8965-40E99B9C1AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D755547B-7638-493F-8965-40E99B9C1AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D755547B-7638-493F-8965-40E99B9C1AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
