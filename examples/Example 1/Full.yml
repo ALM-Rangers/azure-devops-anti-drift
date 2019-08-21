@@ -1,9 +1,11 @@
 # Teams Section
 Teams:
 - Name: Team 1
-  Identity: Security Group 1
+  Members: 
+  - Security Group 1
 - Name: Team 2
-  Identity: Security Group 2
+  Members: 
+  - Security Group 2
 
 # Patterns
 Patterns:
