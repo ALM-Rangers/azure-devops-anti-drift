@@ -48,7 +48,7 @@ namespace Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests
             // Assert
             actual.Select(a => a.Name).Should().Contain(expected);
 
-            await Task.CompletedTask;
+            await Task.CompletedTask.ConfigureAwait(false);
         }
 
         [TestMethod]
