@@ -9,6 +9,9 @@ trigger:
 - hotfix/*
 - bug/*
 
+pr:
+- master
+
 pool:
   vmImage: 'ubuntu-latest'
 
