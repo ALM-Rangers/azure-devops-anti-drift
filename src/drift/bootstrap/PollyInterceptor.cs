@@ -14,10 +14,7 @@ namespace Rangers.Antidrift.Drift
 
         public void Intercept(IInvocation invocation)
         {
-            policy.Execute(() =>
-            {
-                invocation.Proceed();
-            });
+            policy.Execute(invocation.Proceed);
         }
     }
 }

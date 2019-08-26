@@ -14,55 +14,59 @@
 
         static async Task Main(string[] args)
         {
-            using Parser parser = new Parser(with =>
-             {
-                 with.CaseSensitive = false;
-                 with.CaseInsensitiveEnumValues = true;
-                 with.EnableDashDash = true;
-                 with.HelpWriter = Console.Out;
-             });
-            ArgumentOptions options = null;
+			var parser = new Parser(with =>
+			{
+				with.CaseSensitive = false;
+				with.CaseInsensitiveEnumValues = true;
+				with.EnableDashDash = true;
+				with.HelpWriter = Console.Out;
+            });
 
-            parser.ParseArguments<ArgumentOptions>(args)
-                .WithParsed(opts => options = opts)
-                .WithNotParsed(errors => Environment.Exit(ERROR_BAD_ARGUMENTS));
+			using (parser)
+			{
+				ArgumentOptions options = null;
 
-            Uri baseUri = new Uri(options.ServiceUrl);
-            VssCredentials credentials = null;
+				parser.ParseArguments<ArgumentOptions>(args)
+					.WithParsed(opts => options = opts)
+					.WithNotParsed(errors => Environment.Exit(ERROR_BAD_ARGUMENTS));
 
-            switch (options.AuthType)
-            {
-                case AuthType.Pat:
-                    credentials = new VssBasicCredential(string.Empty, options.Token);
-                    break;
-                case AuthType.Basic:
-                    credentials = new VssBasicCredential(options.Username, options.Password);
-                    break;
-                case AuthType.Ntlm:
-                    credentials = new VssCredentials();
-                    break;
-                case AuthType.Interactive:
-                    credentials = new VssClientCredentials(new WindowsCredential(false),
-                                    new VssFederatedCredential(false),
-                                    CredentialPromptType.PromptIfNeeded);
-                    break;
-                default:
-                    break;
-            }
+				Uri baseUri = new Uri(options.ServiceUrl);
+				VssCredentials credentials = null;
 
-            VssConnection connection = new VssConnection(baseUri, credentials);
+				switch (options.AuthType)
+				{
+					case AuthType.Pat:
+						credentials = new VssBasicCredential(string.Empty, options.Token);
+						break;
+					case AuthType.Basic:
+						credentials = new VssBasicCredential(options.Username, options.Password);
+						break;
+					case AuthType.Ntlm:
+						credentials = new VssCredentials();
+						break;
+					case AuthType.Interactive:
+						credentials = new VssClientCredentials(new WindowsCredential(false),
+										new VssFederatedCredential(false),
+										CredentialPromptType.PromptIfNeeded);
+						break;
+					default:
+						break;
+				}
 
-            try
-            {
-                await connection.ConnectAsync().ConfigureAwait(false);
+				VssConnection connection = new VssConnection(baseUri, credentials);
 
-                // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
-            }
-            catch (Exception)
-            {
-                // handle Exception
-                throw;
-            }
+				try
+				{
+					await connection.ConnectAsync().ConfigureAwait(false);
+
+					// TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
+				}
+				catch (Exception)
+				{
+					// handle Exception
+					throw;
+				}
+			}
         }
     }
 }
