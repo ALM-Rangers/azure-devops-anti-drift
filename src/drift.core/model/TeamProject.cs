@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Rangers.Antidrift.Drift.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class TeamProject
     {
-        public string[] AgentPools { get; set; } = new string[0];
+        public string[] AgentPools { get; set; } = Array.Empty<string>();
 
         public Guid Id { get; set; }
 
@@ -15,9 +15,9 @@ namespace Rangers.Antidrift.Drift.Core
 
         public string Name { get; set; }
 
-        public IList<Pattern> Patterns { get; set; } = new List<Pattern>();
+        public IList<Pattern> Patterns { get; } = new List<Pattern>();
 
-        public IList<Team> Teams { get; set; } = new List<Team>();
+        public IList<Team> Teams { get; } = new List<Team>();
 
         public TeamProjectStatus Status { get; set; } = TeamProjectStatus.Active;
 
@@ -27,11 +27,11 @@ namespace Rangers.Antidrift.Drift.Core
 
             foreach (var pattern in this.Patterns)
             {
-                 var task = pattern.CollectDeviations(this);
-                 tasks.Add(task);
+                var task = pattern.CollectDeviations(this);
+                tasks.Add(task);
             }
 
-            var results = await Task.WhenAll(tasks);
+            var results = await Task.WhenAll(tasks).ConfigureAwait(false);
             return results.SelectMany(r => r);
         }
     }

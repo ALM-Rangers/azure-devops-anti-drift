@@ -1,8 +1,8 @@
-using Castle.DynamicProxy;
-using Polly;
-
 namespace Rangers.Antidrift.Drift
 {
+    using Castle.DynamicProxy;
+    using Polly;
+
     public class PollyInterceptor : IInterceptor
     {
         private readonly ISyncPolicy policy;
@@ -14,7 +14,7 @@ namespace Rangers.Antidrift.Drift
 
         public void Intercept(IInvocation invocation)
         {
-            policy.Execute(() => 
+            policy.Execute(() =>
             {
                 invocation.Proceed();
             });

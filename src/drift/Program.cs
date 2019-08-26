@@ -1,27 +1,26 @@
-﻿using CommandLine;
-using Microsoft.VisualStudio.Services.Client;
-using Microsoft.VisualStudio.Services.Common;
-using Microsoft.VisualStudio.Services.WebApi;
-using Rangers.Antidrift.Drift.Arguments;
-using System;
-using System.Threading.Tasks;
-
-namespace Rangers.Antidrift.Drift
+﻿namespace Rangers.Antidrift.Drift
 {
+    using System;
+    using System.Threading.Tasks;
+    using CommandLine;
+    using Microsoft.VisualStudio.Services.Client;
+    using Microsoft.VisualStudio.Services.Common;
+    using Microsoft.VisualStudio.Services.WebApi;
+    using Rangers.Antidrift.Drift.Arguments;
+
     class Program
     {
         private const int ERROR_BAD_ARGUMENTS = 0xA0;
 
         static async Task Main(string[] args)
         {
-            Parser parser = new Parser(with =>
-            {
-                with.CaseSensitive = false;
-                with.CaseInsensitiveEnumValues = true;
-                with.EnableDashDash = true;
-                with.HelpWriter = Console.Out;
-            });
-
+            using Parser parser = new Parser(with =>
+             {
+                 with.CaseSensitive = false;
+                 with.CaseInsensitiveEnumValues = true;
+                 with.EnableDashDash = true;
+                 with.HelpWriter = Console.Out;
+             });
             ArgumentOptions options = null;
 
             parser.ParseArguments<ArgumentOptions>(args)
@@ -55,7 +54,7 @@ namespace Rangers.Antidrift.Drift
 
             try
             {
-                await connection.ConnectAsync();
+                await connection.ConnectAsync().ConfigureAwait(false);
 
                 // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
             }

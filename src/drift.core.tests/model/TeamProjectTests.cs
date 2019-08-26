@@ -1,12 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Rangers.Antidrift.Drift.Core;
-
 namespace Rangers.Antidrift.Drift.Core.Tests
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using FluentAssertions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class TeamProjectTests
     {
@@ -16,7 +15,7 @@ namespace Rangers.Antidrift.Drift.Core.Tests
             // Arrange
             var pattern1 = new Mock<Pattern>();
             var pattern2 = new Mock<Pattern>();
-            
+
             var deviation1 = new Deviation();
             var deviation2 = new Deviation();
 
@@ -24,11 +23,11 @@ namespace Rangers.Antidrift.Drift.Core.Tests
             target.Patterns.Add(pattern1.Object);
             target.Patterns.Add(pattern2.Object);
 
-            pattern1.Setup(t => t.CollectDeviations(target)).ReturnsAsync(new List<Deviation>{ deviation1 });         
-            pattern2.Setup(t => t.CollectDeviations(target)).ReturnsAsync(new List<Deviation>{ deviation2 });
+            pattern1.Setup(t => t.CollectDeviations(target)).ReturnsAsync(new List<Deviation> { deviation1 });
+            pattern2.Setup(t => t.CollectDeviations(target)).ReturnsAsync(new List<Deviation> { deviation2 });
 
             // Act
-            var actual = await target.CollectDeviations();
+            var actual = await target.CollectDeviations().ConfigureAwait(false);
 
             // Assert
             pattern1.VerifyAll();
@@ -40,7 +39,7 @@ namespace Rangers.Antidrift.Drift.Core.Tests
                   .Contain(deviation2);
 
 
-            await Task.CompletedTask;
+            await Task.CompletedTask.ConfigureAwait(false);
         }
     }
 }

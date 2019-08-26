@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Rangers.Antidrift.Drift.Core
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class SecurityPattern : Pattern
     {
         private readonly IGraphService graphService;
@@ -14,30 +14,30 @@ namespace Rangers.Antidrift.Drift.Core
             this.graphService = graphService;
         }
 
-        public IList<ApplicationGroup> ApplicationGroups { get; set; } = new List<ApplicationGroup>();
+        public IList<ApplicationGroup> ApplicationGroups { get; } = new List<ApplicationGroup>();
 
         public async override Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
         {
-            var results = (await base.CollectDeviations(teamProject)).ToList();
-            var currentApplicationGroups = await this.graphService.GetApplicationGroups(teamProject);
+            var results = (await base.CollectDeviations(teamProject).ConfigureAwait(false)).ToList();
+            var currentApplicationGroups = await this.graphService.GetApplicationGroups(teamProject).ConfigureAwait(false);
 
             // Check if the application group exists
             var missingApplicationGroupDeviations = this.ApplicationGroups
                 .Where(ag => currentApplicationGroups.All(cag => !cag.Name.Equals(ag.Name, StringComparison.OrdinalIgnoreCase)))
-                .Select(ag => new ApplicationGroupDeviation { ApplicationGroup = ag, TeamProject = teamProject, Type = DeviationType.Missing})
+                .Select(ag => new ApplicationGroupDeviation { ApplicationGroup = ag, TeamProject = teamProject, Type = DeviationType.Missing })
                 .ToList();
 
             // Check for obsolete application groups.
             var obsoleteApplicationGroupDeviations = currentApplicationGroups
                 .Where(cag => !cag.IsSpecial)
                 .Where(cag => this.ApplicationGroups.All(ag => !ag.Name.Equals(cag.Name, StringComparison.OrdinalIgnoreCase)))
-                .Select(ag => new ApplicationGroupDeviation { ApplicationGroup = ag, TeamProject = teamProject, Type = DeviationType.Obsolete})
+                .Select(ag => new ApplicationGroupDeviation { ApplicationGroup = ag, TeamProject = teamProject, Type = DeviationType.Obsolete })
                 .ToList();
 
             foreach (var applicationGroup in this.ApplicationGroups)
             {
-                var currentMembers = currentApplicationGroups.Any(ag => ag.Name.Equals(applicationGroup.Name, StringComparison.OrdinalIgnoreCase)) 
-                                     ? (await this.graphService.GetMembers(teamProject, applicationGroup)) 
+                var currentMembers = currentApplicationGroups.Any(ag => ag.Name.Equals(applicationGroup.Name, StringComparison.OrdinalIgnoreCase))
+                                     ? (await this.graphService.GetMembers(teamProject, applicationGroup).ConfigureAwait(false))
                                      : new List<string>();
 
                 // Check if the application group contains the correct members

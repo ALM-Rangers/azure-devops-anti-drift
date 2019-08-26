@@ -5,15 +5,15 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift", "drift\drift.csproj", "{97E5FD63-0EE8-4AFF-A372-B17B88080F20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.tests", "drift.tests\drift.tests.csproj", "{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.tests", "drift.tests\drift.tests.csproj", "{0F6CB098-0E94-4C9B-A8F2-EC2D02A08B1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core", "drift.core\drift.core.csproj", "{7CC6EA4E-1D4A-425D-B910-13CE3AADC7DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.core", "drift.core\drift.core.csproj", "{7CC6EA4E-1D4A-425D-B910-13CE3AADC7DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core.tests", "drift.core.tests\drift.core.tests.csproj", "{554E9115-8667-4107-9257-69F7CAE6E5EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.core.tests", "drift.core.tests\drift.core.tests.csproj", "{554E9115-8667-4107-9257-69F7CAE6E5EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core.services.azuredevops", "drift.core.services.azuredevops\drift.core.services.azuredevops.csproj", "{D755547B-7638-493F-8965-40E99B9C1AEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.core.services.azuredevops", "drift.core.services.azuredevops\drift.core.services.azuredevops.csproj", "{D755547B-7638-493F-8965-40E99B9C1AEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drift.core.services.azuredevops.tests", "drift.core.services.azuredevops.tests\drift.core.services.azuredevops.tests.csproj", "{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.core.services.azuredevops.tests", "drift.core.services.azuredevops.tests\drift.core.services.azuredevops.tests.csproj", "{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
