@@ -18,10 +18,18 @@ namespace Rangers.Antidrift.Drift
     using Microsoft.VisualStudio.Services.WebApi;
     using Rangers.Antidrift.Drift.Arguments;
 
-    class Program
+    /// <summary>
+    /// Anti-drift execution class.
+    /// </summary>
+    public static class Program
     {
-        private const int ERROR_BAD_ARGUMENTS = 0xA0;
+        private const int ErrorBadArguments = 0xA0;
 
+        /// <summary>
+        /// Entry point of the command-line utility.
+        /// </summary>
+        /// <param name="args">Command line arguments.</param>
+        /// <returns>A <see cref="Task"/> representing the result of the asynchronous operation.</returns>
         public static async Task Main(string[] args)
         {
             using (var parser = new Parser(with =>
@@ -36,7 +44,7 @@ namespace Rangers.Antidrift.Drift
 
                 parser.ParseArguments<ArgumentOptions>(args)
                     .WithParsed(opts => options = opts)
-                    .WithNotParsed(errors => Environment.Exit(ERROR_BAD_ARGUMENTS));
+                    .WithNotParsed(errors => Environment.Exit(ErrorBadArguments));
 
                 Uri baseUri = new Uri(options.ServiceUrl);
                 VssCredentials credentials = null;
@@ -53,9 +61,10 @@ namespace Rangers.Antidrift.Drift
                         credentials = new VssCredentials();
                         break;
                     case AuthType.Interactive:
-                        credentials = new VssClientCredentials(new WindowsCredential(false),
-                                        new VssFederatedCredential(false),
-                                        CredentialPromptType.PromptIfNeeded);
+                        credentials = new VssClientCredentials(
+                            new WindowsCredential(false),
+                            new VssFederatedCredential(false),
+                            CredentialPromptType.PromptIfNeeded);
                         break;
                     default:
                         break;
