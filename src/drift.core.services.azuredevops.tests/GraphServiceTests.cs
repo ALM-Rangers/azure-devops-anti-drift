@@ -1,3 +1,7 @@
+// <copyright file="GraphServiceTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests
 {
     using System;

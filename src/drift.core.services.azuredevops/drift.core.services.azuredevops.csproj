@@ -1,5 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Rangers.Antidrift.Drift.Core.Services.AzureDevOps</AssemblyName>
+    <RootNamespace>Rangers.Antidrift.Drift.Core.Services</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\drift.core\drift.core.csproj" />
   </ItemGroup>
@@ -15,11 +26,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Rangers.Antidrift.Drift.Core.Services.AzureDevOps</AssemblyName>
-    <RootNamespace>Rangers.Antidrift.Drift.Core.Services</RootNamespace>
-  </PropertyGroup>
 
 </Project>

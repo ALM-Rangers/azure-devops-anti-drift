@@ -6,7 +6,12 @@
     <AssemblyName>Rangers.Antidrift.Drift</AssemblyName>
     <RootNamespace>Rangers.Antidrift.Drift</RootNamespace>
     <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="autofac" Version="4.9.4" />

@@ -1,4 +1,14 @@
-﻿namespace Rangers.Antidrift.Drift
+﻿// -----------------------------------------------------------------------
+// <copyright file="Program.cs" company="ALM | DevOps Rangers">
+//    This code is licensed under the MIT License.
+//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
+//    ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+//    TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+//    A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Rangers.Antidrift.Drift
 {
     using System;
     using System.Threading.Tasks;
@@ -12,61 +22,59 @@
     {
         private const int ERROR_BAD_ARGUMENTS = 0xA0;
 
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
-			var parser = new Parser(with =>
-			{
-				with.CaseSensitive = false;
-				with.CaseInsensitiveEnumValues = true;
-				with.EnableDashDash = true;
-				with.HelpWriter = Console.Out;
-            });
+            using (var parser = new Parser(with =>
+            {
+                with.CaseSensitive = false;
+                with.CaseInsensitiveEnumValues = true;
+                with.EnableDashDash = true;
+                with.HelpWriter = Console.Out;
+            }))
+            {
+                ArgumentOptions options = null;
 
-			using (parser)
-			{
-				ArgumentOptions options = null;
+                parser.ParseArguments<ArgumentOptions>(args)
+                    .WithParsed(opts => options = opts)
+                    .WithNotParsed(errors => Environment.Exit(ERROR_BAD_ARGUMENTS));
 
-				parser.ParseArguments<ArgumentOptions>(args)
-					.WithParsed(opts => options = opts)
-					.WithNotParsed(errors => Environment.Exit(ERROR_BAD_ARGUMENTS));
+                Uri baseUri = new Uri(options.ServiceUrl);
+                VssCredentials credentials = null;
 
-				Uri baseUri = new Uri(options.ServiceUrl);
-				VssCredentials credentials = null;
+                switch (options.AuthType)
+                {
+                    case AuthType.Pat:
+                        credentials = new VssBasicCredential(string.Empty, options.Token);
+                        break;
+                    case AuthType.Basic:
+                        credentials = new VssBasicCredential(options.Username, options.Password);
+                        break;
+                    case AuthType.Ntlm:
+                        credentials = new VssCredentials();
+                        break;
+                    case AuthType.Interactive:
+                        credentials = new VssClientCredentials(new WindowsCredential(false),
+                                        new VssFederatedCredential(false),
+                                        CredentialPromptType.PromptIfNeeded);
+                        break;
+                    default:
+                        break;
+                }
 
-				switch (options.AuthType)
-				{
-					case AuthType.Pat:
-						credentials = new VssBasicCredential(string.Empty, options.Token);
-						break;
-					case AuthType.Basic:
-						credentials = new VssBasicCredential(options.Username, options.Password);
-						break;
-					case AuthType.Ntlm:
-						credentials = new VssCredentials();
-						break;
-					case AuthType.Interactive:
-						credentials = new VssClientCredentials(new WindowsCredential(false),
-										new VssFederatedCredential(false),
-										CredentialPromptType.PromptIfNeeded);
-						break;
-					default:
-						break;
-				}
+                VssConnection connection = new VssConnection(baseUri, credentials);
 
-				VssConnection connection = new VssConnection(baseUri, credentials);
+                try
+                {
+                    await connection.ConnectAsync().ConfigureAwait(false);
 
-				try
-				{
-					await connection.ConnectAsync().ConfigureAwait(false);
-
-					// TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
-				}
-				catch (Exception)
-				{
-					// handle Exception
-					throw;
-				}
-			}
+                    // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
+                }
+                catch (Exception)
+                {
+                    // handle Exception
+                    throw;
+                }
+            }
         }
     }
 }

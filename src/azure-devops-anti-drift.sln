@@ -15,6 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.core.services.azurede
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "drift.core.services.azuredevops.tests", "drift.core.services.azuredevops.tests\drift.core.services.azuredevops.tests.csproj", "{F75C2EB4-3485-4B7D-8A8E-B89D217E4E5C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{CF169A78-F2D7-481D-98D0-A9CA1758823E}"
+	ProjectSection(SolutionItems) = preProject
+		build.runsettings = build.runsettings
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
