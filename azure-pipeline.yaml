@@ -5,6 +5,12 @@
 
 trigger:
 - master
+- feature/*
+- hotfix/*
+- bug/*
+
+pr:
+- master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -18,6 +24,7 @@ steps:
 - task: GitVersion@5
   inputs:
     runtime: 'core'
+
 - task: replacetokens@3
   inputs:
     rootDirectory: 'src'
@@ -28,18 +35,21 @@ steps:
     keepToken: false
     tokenPrefix: '#{'
     tokenSuffix: '}#'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
     arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
     command: build
     workingDirectory: $(Build.SourcesDirectory)/src
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test'
   inputs:
-    arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber) --settings $(Build.SourcesDirectory)/src/build.runsettings
-    command: test
-    workingDirectory: $(Build.SourcesDirectory)/src
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber) --settings $(Build.SourcesDirectory)/src/build.runsettings --collect:"code coverage"'
+    workingDirectory: '$(Build.SourcesDirectory)/src'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
@@ -48,6 +58,7 @@ steps:
     publishWebProjects: false
     zipAfterPublish: false
     workingDirectory: $(Build.SourcesDirectory)/src/drift
+    
 - task: PublishPipelineArtifact@0
   inputs:
     artifactName: 'drop'

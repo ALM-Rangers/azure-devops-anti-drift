@@ -6,15 +6,28 @@
     <AssemblyName>Rangers.Antidrift.Drift</AssemblyName>
     <RootNamespace>Rangers.Antidrift.Drift</RootNamespace>
     <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="autofac" Version="4.9.4" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.5.0" />
-    <PackageReference Include="CommandLineParser" Version="2.5.0" />
+    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="16.143.2" />
     <PackageReference Include="Microsoft.VisualStudio.Services.InteractiveClient" Version="16.143.2" />
     <PackageReference Include="polly" Version="7.1.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

@@ -334,3 +334,6 @@ ASALocalRun/
 
 # Custom
 local.runsettings
+
+# Folder custom configuration on macOS for Finder application
+.DS_Store
