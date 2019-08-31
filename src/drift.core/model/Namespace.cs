@@ -8,6 +8,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Linq;
+
 namespace Rangers.Antidrift.Drift.Core
 {
     public class Namespace
@@ -17,5 +19,15 @@ namespace Rangers.Antidrift.Drift.Core
         public string[] Deny { get; set; }
 
         public string Name { get; set; }
+
+        public Namespace Expand(TeamProject teamProject)
+        {
+            var result = new Namespace();
+            result.Allow = this.Allow.Select(a => a.Expand(teamProject)).ToArray();
+            result.Deny = this.Deny.Select(d => d.Expand(teamProject)).ToArray();
+            result.Name = this.Name.Expand(teamProject);
+
+            return result;
+        }
     }
 }

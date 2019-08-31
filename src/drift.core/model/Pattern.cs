@@ -10,6 +10,7 @@
 
 namespace Rangers.Antidrift.Drift.Core
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -20,6 +21,17 @@ namespace Rangers.Antidrift.Drift.Core
         public async virtual Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
         {
             return await Task.FromResult(new List<Deviation>()).ConfigureAwait(false);
+        }
+
+        public virtual Pattern Expand(TeamProject teamProject)
+        {
+            return this.Expand(new Pattern(), teamProject);
+        }
+
+        public virtual Pattern Expand(Pattern pattern, TeamProject teamProject)
+        {   
+            pattern.Name = this.Name.Expand(teamProject);
+            return pattern;
         }
     }
 }
