@@ -51,5 +51,26 @@ namespace Rangers.Antidrift.Drift.Core.Tests
 
             await Task.CompletedTask.ConfigureAwait(false);
         }
+    
+        [TestMethod]
+        public void Expand()
+        {
+            var graphService = new Mock<IGraphService>();
+
+            var applicationGroup = new ApplicationGroup { Name = "[{teamProject.Name}]\\Project Administrators" };
+            var pattern = new SecurityPattern(graphService.Object) { Name = "Test" };
+            pattern.ApplicationGroups.Add(applicationGroup);
+
+            var teamProject = new TeamProject { Name = "Test" };
+            teamProject.Patterns.Add(new SecurityPattern(graphService.Object){ Name = "Test" });
+
+            var target = new Organization();
+            target.Patterns.Add(pattern);
+            target.TeamProjects.Add(teamProject);
+
+            target.Expand();
+
+            ((SecurityPattern)teamProject.Patterns[0]).ApplicationGroups[0].Name.Should().Be("[Test]\\Project Administrators");
+        }
     }
 }

@@ -34,6 +34,12 @@ namespace Rangers.Antidrift.Drift.Core
                     var pattern = this.Patterns.FirstOrDefault(p => p.Name.Equals(teamProject.Patterns[i].Name, StringComparison.OrdinalIgnoreCase));
                     teamProject.Patterns[i] = pattern.Expand(teamProject);
                 }
+
+                for (int i = 0; i < teamProject.Teams.Count; i++)
+                {
+                    var team = this.Teams.FirstOrDefault(t => t.Name.Equals(teamProject.Teams[i].Name, StringComparison.OrdinalIgnoreCase));
+                    teamProject.Teams[i] = team;
+                }
             }
         }
 
