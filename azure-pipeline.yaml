@@ -56,12 +56,7 @@ steps:
     warningFailOption: 'build'
     forceFewerWarnings: true
     showStatistics: true
-    checkCoverage: true
-    coverageFailOption: 'build'
-    coverageType: 'blocks'
-    allowCoverageVariance: true
-    coverageVariance: '3'
-    coverageDeltaType: 'percentage'
+  displayName: 'Build quality check'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
