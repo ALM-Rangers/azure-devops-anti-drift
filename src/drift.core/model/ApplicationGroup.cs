@@ -27,12 +27,13 @@ namespace Rangers.Antidrift.Drift.Core
 
         public ApplicationGroup Expand(TeamProject teamProject)
         {
-            var result = new ApplicationGroup();
-            result.Name = this.Name.Expand(teamProject);
-            result.Namespaces = this.Namespaces.Select(n => n.Expand(teamProject)).ToList();
-            result.Members = this.Members.Select(m => m.Expand(teamProject)).ToArray();
 
-            return result;
+            return new ApplicationGroup
+            {
+                Name = this.Name.Expand(teamProject),
+                Namespaces = this.Namespaces.Select(n => n.Expand(teamProject)).ToList(),
+                Members = this.Members.Select(m => m.Expand(teamProject)).ToArray(),
+            };
         }
     }
 }
