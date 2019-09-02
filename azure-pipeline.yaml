@@ -55,6 +55,7 @@ steps:
     checkWarnings: true
     warningFailOption: 'build'
     forceFewerWarnings: true
+    warningFilters: '/\s([1-9]\d*\.?[0]*)\s+Warning\(s\)|\s([1-9]\d*\.?[0]*)\s+Error\(s\)/'
     showStatistics: true
     warningTaskFilters: '/^(((android|Xcode|gradlew|dotnet)\s+)?build|ant|maven|cmake|gulp)/i'
   displayName: 'Build quality check'
