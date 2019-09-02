@@ -24,7 +24,7 @@ namespace Rangers.Antidrift.Drift.Core
             this.graphService = graphService;
         }
 
-        public IList<ApplicationGroup> ApplicationGroups { get; } = new List<ApplicationGroup>();
+        public IList<ApplicationGroup> ApplicationGroups { get; set; } = new List<ApplicationGroup>();
 
         public async override Task<IEnumerable<Deviation>> CollectDeviations(TeamProject teamProject)
         {
@@ -73,6 +73,15 @@ namespace Rangers.Antidrift.Drift.Core
             results.AddRange(obsoleteApplicationGroupDeviations);
 
             return results;
+        }
+    
+        public override Pattern Expand(TeamProject teamProject)
+        {
+            var result = new SecurityPattern(this.graphService);
+            this.Expand(result, teamProject);
+            result.ApplicationGroups = this.ApplicationGroups.Select(ag => ag.Expand(teamProject)).ToList();
+
+            return result;
         }
     }
 }

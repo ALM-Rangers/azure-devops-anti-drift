@@ -25,6 +25,24 @@ namespace Rangers.Antidrift.Drift.Core
 
         public IList<Team> Teams { get; } = new List<Team>();
 
+        public void Expand()
+        {
+            foreach (var teamProject in this.TeamProjects)
+            {
+                for (int i = 0; i < teamProject.Patterns.Count; i++)
+                {
+                    var pattern = this.Patterns.FirstOrDefault(p => p.Name.Equals(teamProject.Patterns[i].Name, StringComparison.OrdinalIgnoreCase));
+                    teamProject.Patterns[i] = pattern.Expand(teamProject);
+                }
+
+                for (int i = 0; i < teamProject.Teams.Count; i++)
+                {
+                    var team = this.Teams.FirstOrDefault(t => t.Name.Equals(teamProject.Teams[i].Name, StringComparison.OrdinalIgnoreCase));
+                    teamProject.Teams[i] = team;
+                }
+            }
+        }
+
         public async Task<IEnumerable<Deviation>> CollectDeviations()
         {
             var tasks = new List<Task<IEnumerable<Deviation>>>();

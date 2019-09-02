@@ -11,6 +11,7 @@
 namespace Rangers.Antidrift.Drift.Core
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     public class ApplicationGroup
     {
@@ -18,10 +19,20 @@ namespace Rangers.Antidrift.Drift.Core
 
         public bool IsSpecial { get; set; }
 
-        public string[] Members { get; set; } = System.Array.Empty<string>();
-
         public string Name { get; set; }
 
-        public IList<Namespace> Namespaces { get; } = new List<Namespace>();
+        public IList<Namespace> Namespaces { get; set; } = new List<Namespace>();
+
+        public string[] Members { get; set; } = System.Array.Empty<string>();
+
+        public ApplicationGroup Expand(TeamProject teamProject)
+        {
+            var result = new ApplicationGroup();
+            result.Name = this.Name.Expand(teamProject);
+            result.Namespaces = this.Namespaces.Select(n => n.Expand(teamProject)).ToList();
+            result.Members = this.Members.Select(m => m.Expand(teamProject)).ToArray();
+
+            return result;
+        }
     }
 }
