@@ -19,7 +19,7 @@ namespace Rangers.Antidrift.Drift.Core.Tests
         [TestMethod]
         public void Expand()
         {
-            var teamProject = new TeamProject{ Name = "Test" };
+            var teamProject = new TeamProject { Name = "Test" };
 
             var target = "We are testing team project {teamProject.Name}.";
             var actual = target.Expand(teamProject);
