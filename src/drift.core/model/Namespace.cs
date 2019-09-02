@@ -22,12 +22,12 @@ namespace Rangers.Antidrift.Drift.Core
 
         public Namespace Expand(TeamProject teamProject)
         {
-            var result = new Namespace();
-            result.Allow = this.Allow.Select(a => a.Expand(teamProject)).ToArray();
-            result.Deny = this.Deny.Select(d => d.Expand(teamProject)).ToArray();
-            result.Name = this.Name.Expand(teamProject);
-
-            return result;
+            return new Namespace
+            {
+                Allow = this.Allow.Select(a => a.Expand(teamProject)).ToArray(),
+                Deny = this.Deny.Select(d => d.Expand(teamProject)).ToArray(),
+                Name = this.Name.Expand(teamProject)
+            };
         }
     }
 }
