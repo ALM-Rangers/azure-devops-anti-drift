@@ -50,6 +50,15 @@ steps:
     arguments: '--configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber) --settings $(Build.SourcesDirectory)/src/build.runsettings --collect:"code coverage"'
     workingDirectory: '$(Build.SourcesDirectory)/src'
 
+- task: BuildQualityChecks@6
+  inputs:
+    checkWarnings: true
+    warningFailOption: 'build'
+    warningFilters: '/\s([1-9]\d*\.?[0]*)\s+Warning\(s\)|\s([1-9]\d*\.?[0]*)\s+Error\(s\)/'
+    showStatistics: true
+    warningTaskFilters: '/^(((android|Xcode|gradlew|dotnet)\s+)?build|ant|maven|cmake|gulp)/i'
+  displayName: 'Build quality check'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:

@@ -48,10 +48,9 @@ namespace Rangers.Antidrift.Drift.Core.Tests
                   .And
                   .Contain(deviation2);
 
-
             await Task.CompletedTask.ConfigureAwait(false);
         }
-    
+
         [TestMethod]
         public void Expand()
         {
@@ -62,7 +61,7 @@ namespace Rangers.Antidrift.Drift.Core.Tests
             pattern.ApplicationGroups.Add(applicationGroup);
 
             var teamProject = new TeamProject { Name = "Test" };
-            teamProject.Patterns.Add(new SecurityPattern(graphService.Object){ Name = "Test" });
+            teamProject.Patterns.Add(new SecurityPattern(graphService.Object) { Name = "Test" });
 
             var target = new Organization();
             target.Patterns.Add(pattern);

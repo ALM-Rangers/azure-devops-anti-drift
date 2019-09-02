@@ -48,7 +48,6 @@ namespace Rangers.Antidrift.Drift.Core.Tests
                   .And
                   .Contain(deviation2);
 
-
             await Task.CompletedTask.ConfigureAwait(false);
         }
     }
