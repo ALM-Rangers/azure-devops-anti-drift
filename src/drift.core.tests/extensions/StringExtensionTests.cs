@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="OrganizationTests.cs" company="ALM | DevOps Rangers">
+// <copyright file="StringExtensionTests.cs" company="ALM | DevOps Rangers">
 //    This code is licensed under the MIT License.
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
 //    ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED

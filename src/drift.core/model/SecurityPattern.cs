@@ -74,7 +74,7 @@ namespace Rangers.Antidrift.Drift.Core
 
             return results;
         }
-    
+
         public override Pattern Expand(TeamProject teamProject)
         {
             var result = new SecurityPattern(this.graphService);

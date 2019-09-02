@@ -51,7 +51,7 @@ namespace Rangers.Antidrift.Drift.Core.Tests
 
             await Task.CompletedTask.ConfigureAwait(false);
         }
-    
+
         [TestMethod]
         public void Expand()
         {

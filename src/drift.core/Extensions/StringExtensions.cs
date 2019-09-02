@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="OrganizationTests.cs" company="ALM | DevOps Rangers">
+// <copyright file="StringExtensions.cs" company="ALM | DevOps Rangers">
 //    This code is licensed under the MIT License.
 //    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF
 //    ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------
 
 namespace Rangers.Antidrift.Drift.Core
-{    
+{
     using System.Linq.Dynamic.Core;
     using System.Linq.Expressions;
     using System.Text.RegularExpressions;
