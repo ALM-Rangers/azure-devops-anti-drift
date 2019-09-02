@@ -62,7 +62,6 @@ namespace Rangers.Antidrift.Drift.Core
                     .Select(cm => new ApplicationGroupMemberDeviation { ApplicationGroup = applicationGroup, Member = cm, TeamProject = teamProject, Type = DeviationType.Obsolete })
                     .ToList();
 
-
                 results.AddRange(missingApplicationGroupMemberDeviations);
                 results.AddRange(obsoleteApplictionGroupMemberDeviations);
 
@@ -74,7 +73,7 @@ namespace Rangers.Antidrift.Drift.Core
 
             return results;
         }
-    
+
         public override Pattern Expand(TeamProject teamProject)
         {
             var result = new SecurityPattern(this.graphService);

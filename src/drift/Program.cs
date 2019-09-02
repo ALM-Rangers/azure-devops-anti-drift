@@ -82,7 +82,7 @@ namespace Rangers.Antidrift.Drift
                     organization.Expand();
 
                     var deviations = await organization.CollectDeviations();
-                    
+
                     // TODO: Decide what to do with the deviations (print to screen/file) or remediate them.
                 }
                 catch (Exception)

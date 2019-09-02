@@ -29,7 +29,7 @@ namespace Rangers.Antidrift.Drift.Core
         }
 
         public virtual Pattern Expand(Pattern pattern, TeamProject teamProject)
-        {   
+        {
             pattern.Name = this.Name.Expand(teamProject);
             return pattern;
         }
