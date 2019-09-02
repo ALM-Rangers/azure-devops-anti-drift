@@ -40,6 +40,13 @@ namespace Rangers.Antidrift.Drift
             builder.RegisterType<GraphService>()
                    .WithParameter("connection", connection)
                    .As<IGraphService>();
+            
+            builder.RegisterType<ApplicationGroup>();
+            builder.RegisterType<Namespace>();
+            builder.RegisterType<Organization>();
+            builder.RegisterType<SecurityPattern>();
+            builder.RegisterType<Team>();
+            builder.RegisterType<TeamProject>();
 
             return builder.Build();
         }
