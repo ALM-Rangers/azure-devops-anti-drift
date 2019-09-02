@@ -50,6 +50,19 @@ steps:
     arguments: '--configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber) --settings $(Build.SourcesDirectory)/src/build.runsettings --collect:"code coverage"'
     workingDirectory: '$(Build.SourcesDirectory)/src'
 
+- task: BuildQualityChecks@6
+  inputs:
+    checkWarnings: true
+    warningFailOption: 'build'
+    forceFewerWarnings: true
+    showStatistics: true
+    checkCoverage: true
+    coverageFailOption: 'build'
+    coverageType: 'blocks'
+    allowCoverageVariance: true
+    coverageVariance: '3'
+    coverageDeltaType: 'percentage'
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
