@@ -10,6 +10,7 @@
 
 namespace Rangers.Antidrift.Drift.Core.Tests
 {
+    using System;
     using FluentAssertions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,9 +20,14 @@ namespace Rangers.Antidrift.Drift.Core.Tests
         [TestMethod]
         public void Expand()
         {
+            ((Action)(() => StringExtensions.Expand(null, null))).Should().Throw<ArgumentNullException>();
+
             var teamProject = new TeamProject { Name = "Test" };
 
             var target = "We are testing team project {teamProject.Name}.";
+
+            target.Invoking(t => t.Expand(null)).Should().Throw<ArgumentNullException>();
+
             var actual = target.Expand(teamProject);
 
             actual.Should().Be("We are testing team project Test.");
