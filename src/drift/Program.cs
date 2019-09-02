@@ -17,6 +17,7 @@ namespace Rangers.Antidrift.Drift
     using Microsoft.VisualStudio.Services.Common;
     using Microsoft.VisualStudio.Services.WebApi;
     using Rangers.Antidrift.Drift.Arguments;
+    using Rangers.Antidrift.Drift.Core;
 
     /// <summary>
     /// Anti-drift execution class.
@@ -74,13 +75,19 @@ namespace Rangers.Antidrift.Drift
 
                 try
                 {
-                    await connection.ConnectAsync().ConfigureAwait(false);
+                    var container = Container.Build(connection);
 
+                    var organization = new Organization(); // TODO: Use Factory method to generate org from yaml/json files and container.
                     // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
+                    organization.Expand();
+
+                    var deviations = await organization.CollectDeviations();
+                    
+                    // TODO: Decide what to do with the deviations (print to screen/file) or remediate them.
                 }
                 catch (Exception)
                 {
-                    // handle Exception
+                    // TODO: handle Exception
                     throw;
                 }
             }
