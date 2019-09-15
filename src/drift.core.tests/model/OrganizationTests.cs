@@ -10,6 +10,7 @@
 
 namespace Rangers.Antidrift.Drift.Core.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using FluentAssertions;
@@ -60,10 +61,11 @@ namespace Rangers.Antidrift.Drift.Core.Tests
             var pattern = new SecurityPattern(graphService.Object) { Name = "Test" };
             pattern.ApplicationGroups.Add(applicationGroup);
 
-            var teamProject = new TeamProject { Name = "Test" };
+            var teamProject = new TeamProject { Name = "Test", Key = "1" };
             teamProject.Patterns.Add(new SecurityPattern(graphService.Object) { Name = "Test" });
 
             var target = new Organization();
+            target.Mappings.Add("1", Guid.NewGuid());
             target.Patterns.Add(pattern);
             target.TeamProjects.Add(teamProject);
 
