@@ -12,6 +12,7 @@ namespace Rangers.Antidrift.Drift
 {
     using System;
     using System.Threading.Tasks;
+    using Autofac;
     using CommandLine;
     using Microsoft.VisualStudio.Services.Client;
     using Microsoft.VisualStudio.Services.Common;
@@ -47,16 +48,16 @@ namespace Rangers.Antidrift.Drift
                     .WithParsed(opts => options = opts)
                     .WithNotParsed(errors => Environment.Exit(ErrorBadArguments));
 
-                Uri baseUri = new Uri(options.ServiceUrl);
-                VssCredentials credentials = null;
+                Uri baseUri = new Uri(options.ServiceUrl.Trim());
+                VssCredentials credentials = new VssBasicCredential(string.Empty, options.Token);
 
                 switch (options.AuthType)
                 {
                     case AuthType.Pat:
-                        credentials = new VssBasicCredential(string.Empty, options.Token);
+                        credentials = new VssBasicCredential(string.Empty, options.Token.Trim());
                         break;
                     case AuthType.Basic:
-                        credentials = new VssBasicCredential(options.Username, options.Password);
+                        credentials = new VssBasicCredential(options.Username.Trim(), options.Password.Trim());
                         break;
                     case AuthType.Ntlm:
                         credentials = new VssCredentials();
@@ -71,24 +72,28 @@ namespace Rangers.Antidrift.Drift
                         break;
                 }
 
-                VssConnection connection = new VssConnection(baseUri, credentials);
-
-                try
+                using(var connection = new VssConnection(baseUri, credentials))
                 {
-                    var container = Container.Build(connection);
+                    try
+                    {
+                        await connection.ConnectAsync();
 
-                    var organization = new Organization(); // TODO: Use Factory method to generate org from yaml/json files and container.
-                    // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
-                    organization.Expand();
+                        var container = Container.Build(connection);
+                        var factory = container.Resolve<IModelFactory>();
 
-                    var deviations = await organization.CollectDeviations();
+                        var organization = await factory.Create(options.ConfigurationFilePath).ConfigureAwait(false);
+                        // TODO: Expand patterns so we can use expressions, like [$teampProject]\Project Administrators
+                        organization.Expand();
 
-                    // TODO: Decide what to do with the deviations (print to screen/file) or remediate them.
-                }
-                catch (Exception)
-                {
-                    // TODO: handle Exception
-                    throw;
+                        var deviations = await organization.CollectDeviations().ConfigureAwait(false);
+
+                        // TODO: Decide what to do with the deviations (print to screen/file) or remediate them.
+                    }
+                    catch (Exception)
+                    {
+                        // TODO: handle Exception
+                        throw;
+                    }
                 }
             }
         }

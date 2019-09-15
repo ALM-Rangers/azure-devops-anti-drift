@@ -15,6 +15,6 @@ namespace Rangers.Antidrift.Drift
 
     public interface IModelFactory
     {
-        Task<Organization> Create(string[] files);
+        Task<Organization> Create(params string[] files);
     }
 }

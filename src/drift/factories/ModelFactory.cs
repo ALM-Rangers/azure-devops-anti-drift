@@ -9,7 +9,9 @@
 // -----------------------------------------------------------------------
 
 namespace Rangers.Antidrift.Drift
-{    
+{
+    using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using Autofac;
     using Rangers.Antidrift.Drift.Core;
@@ -25,9 +27,9 @@ namespace Rangers.Antidrift.Drift
             this.factory = factory;
         }
 
-        public async Task<Organization> Create(string[] files)
+        public async Task<Organization> Create(params string[] files)
         {  
-            var combined = string.Join("\n", files);
+            var combined = string.Join("\n", files.Select(f => File.ReadAllText(f)));
 
             return await Task.Factory.StartNew(() =>
             {

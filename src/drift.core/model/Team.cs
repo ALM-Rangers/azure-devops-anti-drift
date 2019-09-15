@@ -8,12 +8,24 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Linq;
+
 namespace Rangers.Antidrift.Drift.Core
 {
     public class Team
     {
-        public string Identity { get; set; }
+        public string[] Members { get; set; }
 
         public string Name { get; set; }
+
+        public Team Expand(TeamProject teamProject)
+        {
+            return new Team 
+            {
+                Name = this.Name.Expand(teamProject),
+                Members = this.Members.Select(m => m.Expand(teamProject)).ToArray()
+            };
+        }
     }
 }
