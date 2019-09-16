@@ -17,6 +17,7 @@ namespace Rangers.Antidrift.Drift
     using Polly;
     using Rangers.Antidrift.Drift.Core;
     using Rangers.Antidrift.Drift.Core.Services;
+    using YamlDotNet.Serialization;
 
     public class Container
     {
@@ -32,6 +33,9 @@ namespace Rangers.Antidrift.Drift
                                        TimeSpan.FromSeconds(2),
                                        TimeSpan.FromSeconds(4),
                                    });
+            
+            builder.RegisterType<AutofacObjectFactory>()
+                   .As<IObjectFactory>();
 
             builder.RegisterInstance<ISyncPolicy>(policy);
             builder.RegisterType<PollyInterceptor>()
@@ -40,6 +44,11 @@ namespace Rangers.Antidrift.Drift
             builder.RegisterType<GraphService>()
                    .WithParameter("connection", connection)
                    .As<IGraphService>();
+            
+            builder.RegisterType<SecurityPattern>();
+
+            builder.RegisterType<ModelFactory>()
+                   .As<IModelFactory>();
 
             return builder.Build();
         }

@@ -25,9 +25,9 @@ namespace Rangers.Antidrift.Drift.Core
 
         public string Name { get; set; }
 
-        public IList<Pattern> Patterns { get; } = new List<Pattern>();
+        public IList<Pattern> Patterns { get; set; } = new List<Pattern>();
 
-        public IList<Team> Teams { get; } = new List<Team>();
+        public IList<Team> Teams { get; set; } = new List<Team>();
 
         public TeamProjectStatus Status { get; set; } = TeamProjectStatus.Active;
 

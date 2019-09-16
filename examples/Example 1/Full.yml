@@ -2,19 +2,16 @@
 Teams:
 - Name: Team 1
   Members: 
-  - Security Group 1
-- Name: Team 2
-  Members: 
-  - Security Group 2
+  - Security Group {teamProject.Key}
 
 # Patterns
 Patterns:
 - !Security # Exclamation mark is not actual yaml, but the yaml library understands it as inheritance, parent is pattern
   Name: Default
-  Application Groups:
+  ApplicationGroups:
   - Name: Contributor
     Members: 
-    - Security Group {0} # {0} will be replaced with a key using a string.format
+    - Security Group {teamProject.Key} # {0} will be replaced with a key using a string.format
     Namespaces:
     - Name: Project
       Allow:
@@ -40,22 +37,22 @@ Patterns:
       - Delete test runs
       - Update project visibility
       - Write to build operational store
-      Not Set:
-      - ...
+#      Not Set:
+#      - ...
 
 # Team Projects
-Team Projects:
+TeamProjects:
 - Key: 00001 # Key is used to generate the security group
-  Name: Team Project 1
+  Name: Drift-1
   Patterns: 
   - !Security
     Name: Default # References the Default security pattern
-  Agent Pools:
-  - linux
-  - windows
+  AgentPools:
+  - Azure Pipelines
   Status: Active # Active, Archived (meaning still available but readonly), Removed.
   Teams:
-  - Team 1 # References Team 1 from the teams section
+  - Name: Team 1
 
 # Mappings
-00001: b939b232-23fe-4aa3-8c56-9e24fd199cb3 # Mapping key to actual team project identifier.
+Mappings:
+  00001: 8e4c61d1-c03f-4fb4-a7a2-01a4a9d1503f # Mapping key to actual team project identifier.
