@@ -15,5 +15,10 @@ namespace Rangers.Antidrift.Drift.Core
         public ApplicationGroup ApplicationGroup { get; set; }
 
         public DeviationType Type { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.ApplicationGroup.Name} is {this.Type} in Team Project {this.TeamProject.Name}.";
+        }
     }
 }
