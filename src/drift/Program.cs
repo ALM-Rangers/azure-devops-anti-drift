@@ -88,6 +88,10 @@ namespace Rangers.Antidrift.Drift
                         var deviations = await organization.CollectDeviations().ConfigureAwait(false);
 
                         // TODO: Decide what to do with the deviations (print to screen/file) or remediate them.
+                        foreach (var deviation in deviations)
+                        {
+                            Console.WriteLine(deviation.ToString());
+                        }
                     }
                     catch (Exception)
                     {
