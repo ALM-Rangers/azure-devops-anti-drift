@@ -1,0 +1,1291 @@
+# Teams Section --------------------------------------------------------------------------------------------------------
+Teams:
+
+# Patterns -------------------------------------------------------------------------------------------------------------
+Patterns:
+- !Security # Exclamation mark is not actual yaml, but the yaml library understands it as inheritance, parent is pattern
+  Name: Default
+  ApplicationGroups:
+  - Name: Build Administrators
+    Members: 
+    - Azure_{teamProject.Alias}_BuildAdministrators # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - View build pipeline
+        - View builds
+        Deny:
+        Not Set:
+        - Override check-in validation by build
+        - Update build information
+    - Name: Git Repositories
+        Allow:
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create tag
+        - Manage notes
+        - Read
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Create repository
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Remove others' locks
+        - Rename repository   
+    - Name: Project
+        Allow:
+        # General
+        - View project-level information
+        # Boards
+        - Create tag definition
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+
+  - Name: Contributors
+    Members: 
+    - Azure_{teamProject.Alias}_Users # AD group
+    - Azure_{teamProject.Alias}_SuperUsers # AD group
+    - DevOps Monitoring Users # AzDO team group
+    - DevOps Production Monitoring # AzDO team group
+    - IT-DevOps Team # group
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        - Queue builds
+        - Retain indefinitely
+        - View build pipeline
+        - View builds
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Override check-in validation by build
+        - Stop builds
+        - Update build information
+    - Name: Git Repositories
+        Allow:
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create tag
+        - Force push (rewrite history, delete branches and tags)
+        - Manage notes
+        - Read
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Create repository
+        - Delete repository
+        - Edit policies
+        - Manage permissions
+        - Remove others' locks
+        - Rename repository   
+    - Name: Project
+        Allow:
+        # General
+        - View project-level information
+        # Boards
+        - Create tag definition
+        - Delete and restore work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Move work items out of this project
+        - Permanently delete work items
+    - Name: ReleaseManagement
+        Allow:
+        - View release pipeline
+        - View releases
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+                
+  - Name: DevOps Monitoring Users
+    Members: 
+    - AZ_WorkSafeBC_DomainUsers # AD group
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository   
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+
+  - Name: DevOps Production Monitoring
+    Members: 
+    - DevOpsPr1 # aad user
+    - DevOpsPr2 # aad user
+    - DevOpsPrdMon_COR # aad user
+    - DevOpsPrdMon_Curam # aad user
+    - DevOpsPrdMon_Emplyr # aad user
+    - DevOpsPrdMon_Premium # aad user
+    - DevOpsPrdMon_Tclaim # aad user
+    - DevOpsPrdMon_Wrkflow # aad user
+    - DevOpsProdMonitor # aad user
+    - DevOpsProdMonitor2 # aad user
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository    
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+                
+  - Name: Endpoint Administrators
+    Members: 
+    - Azure_{teamProject.Alias}_EndpointAdministrators # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository   
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+                 
+  - Name: Endpoint Creators
+    Members: 
+    - Contributors
+    - Project Administrators
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository    
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+
+  - Name: Project Administrators
+    Members: 
+    - Azure_{teamProject.Alias}_ProjectAdministrators # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        Deny:
+        Not Set:
+        - View Analytics
+    - Name: Build
+        Allow:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - View build pipeline
+        - View builds
+        Deny:
+        Not Set:
+        - Override check-in validation by build
+        - Update build information
+    - Name: Git Repositories
+        Allow:
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Manage notes
+        - Manage permissions
+        - Read
+        - Remove others' locks
+        - Rename repository   
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Force push (rewrite history, delete branches and tags)
+    - Name: Project
+        Allow:
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement       
+        Allow:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+        Deny:
+        Not Set:
+
+    Name: Project Valid Users
+    Members: 
+    - Build Administrators # AzDO team group
+    - Contributors # AzDO team group
+    - DevOps Monitoring Users # AzDO team group
+    - DevOps Production Monitoring # AzDO team group
+    - Endpoint Administrators # AzDO team group
+    - Endpoint Creators # AzDO team group
+    - IT-DevOps Team # AzDO team group
+    - Project Administrators # AzDO team group
+    - Readers # AzDO team group
+    - Release Administrators # AzDO team group
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository     
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+
+  - Name: Readers
+    Members: 
+    - Azure_{teamProject.Alias}_Readers # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        - View build pipeline
+        - View builds
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+    - Name: Git Repositories
+        Allow:
+        - Contribute to pull requests
+        - Read
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Remove others' locks
+        - Rename repository     
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        - View test runs
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+    - Name: ReleaseManagement
+        Allow:
+        - View release pipeline
+        - View releases
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+
+  - Name: Release Administrators
+    Members: 
+    - Azure_{teamProject.Alias}_ReleaseAdministrators # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View       
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository    
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+        Deny:
+        Not Set:
+
+Name: Project Administrators
+    Members: 
+    - Azure_{teamProject.Alias}_ProjectAdministrators # {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        Deny:
+        Not Set:
+        - View Analytics
+    - Name: Build
+        Allow:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - View build pipeline
+        - View builds
+        Deny:
+        Not Set:
+        - Override check-in validation by build
+        - Update build information
+    - Name: Git Repositories
+        Allow:
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Manage notes
+        - Manage permissions
+        - Read
+        - Remove others' locks
+        - Rename repository   
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Force push (rewrite history, delete branches and tags)
+    - Name: Project
+        Allow:
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement       
+        Allow:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+        Deny:
+        Not Set:
+
+    Name: Project Valid Users
+    Members: 
+    - Build Administrators # AzDO team group
+    - Contributors # AzDO team group
+    - DevOps Monitoring Users # AzDO team group
+    - DevOps Production Monitoring # AzDO team group
+    - Endpoint Administrators # AzDO team group
+    - Endpoint Creators # AzDO team group
+    - IT-DevOps Team # AzDO team group
+    - Project Administrators # AzDO team group
+    - Readers # AzDO team group
+    - Release Administrators # AzDO team group
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+        Deny:
+        Not Set:
+    - Name: Build
+        Allow:
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Manage build qualities
+        - Manage build queue
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Override check-in validation by build
+        - Update build information
+        - View build pipeline
+        - View builds
+    - Name: Git Repositories
+        Allow:
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Delete repository
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage permissions
+        - Manage notes
+        - Read
+        - Remove others' locks
+        - Rename repository     
+    - Name: Project
+        Allow:
+        # General
+        # Boards
+        # Test Plans
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement
+        Allow:
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Create releases
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Edit release pipeline
+        - Edit release stage
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        - View release pipeline
+        - View releases
+
+Name: Azure_{teamProject.Alias}_SuperUsers# {0} will be replaced with a key using a string.format
+    Namespaces:
+    - Name: Analytics
+        Allow:
+        Deny:
+        Not Set:
+        - Delete shared Analytics View
+        - Edit shared Analytics View
+        - View Analytics
+    - Name: Build
+        Allow:
+        - Delete build pipeline
+        - Delete builds 
+        - Destroy builds
+        - Edit build pipeline
+        - Edit build quality
+        - Queue builds
+        - Retain indefinitely
+        - Stop builds
+        - Update build information
+        - View build pipeline
+        - View builds
+        Deny:
+        Not Set:
+        - Administer build permissions
+        - Manage build qualities
+        - Manage build queue
+        - Override check-in validation by build
+    - Name: Git Repositories
+        Allow:
+        - Contribute
+        - Contribute to pull requests
+        - Create branch
+        - Create repository
+        - Create tag
+        - Edit policies
+        - Force push (rewrite history, delete branches and tags)
+        - Manage notes
+        - Read
+        - Rename repository   
+        Deny:
+        Not Set:
+        - Bypass policies when completing pull requests
+        - Bypass policies when pushing
+        - Delete repository
+        - Manage permissions
+        - Remove others' locks
+    - Name: Project
+        Allow:
+        Deny:
+        Not Set:
+        # General
+        - Delete team project
+        - Edit project-level information
+        - Manage project properties
+        - Rename team project
+        - Suppress notifications for work item updates
+        - Update project visibility
+        - View project-level information
+        # Boards
+        - Bypass rules on work item updates
+        - Change process of team project.
+        - Create tag definition
+        - Delete and restore work items
+        - Move work items out of this project
+        - Permanently delete work items
+        # Test Plans
+        - Create test runs
+        - Delete test runs
+        - Manage test configurations
+        - Manage test environments
+        - View test runs
+    - Name: ReleaseManagement       
+        Allow:
+        - Create releases
+        - Edit release pipeline
+        - Edit release stage
+        - View release pipeline
+        - View releases
+        Deny:
+        Not Set:
+        - Administer release permissions
+        - Delete release pipeline
+        - Delete release stage
+        - Delete releases
+        - Manage deployments
+        - Manage release approvers
+        - Manage release settings
+        - Manage releases
+        - Manage TaskHub Extension
+        
+# Team Projects --------------------------------------------------------------------------------------------------------
+TeamProjects:
+- Key: 00001 # Key is used to generate the security group
+  Name: IT-DevOps
+  Alias: IT_DevOps
+  Patterns: 
+  - !Security
+    Name: Default # References the Default security pattern
+  AgentPools:
+  - Azure Pipelines
+  Status: Active # Active, Archived (meaning still available but readonly), Removed.
+  Teams:
+
+# Mappings -------------------------------------------------------------------------------------------------------------
+Mappings:
+  00001: 282397a2-dc94-4a5f-9ce8-628db489a098 # Mapping key to actual team project identifier.
