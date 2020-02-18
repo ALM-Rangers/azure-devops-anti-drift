@@ -33,6 +33,7 @@ namespace Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests
         {
             get { return this.TestContext.Properties["pat"].ToString(); }
         }
+
         private Guid Antidrift => new Guid(this.TestContext.Properties["antidriftprojectguid"].ToString());
 
         [TestMethod]
