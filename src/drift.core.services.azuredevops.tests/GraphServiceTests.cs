@@ -33,6 +33,7 @@ namespace Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests
         {
             get { return this.TestContext.Properties["pat"].ToString(); }
         }
+        private Guid Antidrift => new Guid(this.TestContext.Properties["antidriftprojectguid"].ToString());
 
         [TestMethod]
         public async Task GetApplicationGroups()
@@ -42,7 +43,7 @@ namespace Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests
             var url = $"https://dev.azure.com/{this.Organization}";
             var connection = new VssConnection(new Uri(url), credentials);
 
-            var teamProject = new TeamProject { Id = new Guid("755bb057-51ac-43f6-a91a-54103f19b800"), Name = "Antidrift" };
+            var teamProject = new TeamProject { Id = this.Antidrift, Name = "Antidrift" };
 
             var expected = new List<string> { "Project Valid Users", "Project Administrators", "Contributors", "Build Administrators", "Readers", "Antidrift Team" };
 
@@ -66,7 +67,7 @@ namespace Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests
             var connection = new VssConnection(new Uri(url), credentials);
 
             var applicationGroup = new ApplicationGroup { Name = "Contributors" };
-            var teamProject = new TeamProject { Id = new Guid("755bb057-51ac-43f6-a91a-54103f19b800"), Name = "Antidrift" };
+            var teamProject = new TeamProject { Id = this.Antidrift, Name = "Antidrift" };
 
             var expected = new List<string> { "Antidrift Team" };
 
