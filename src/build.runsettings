@@ -3,5 +3,6 @@
   <TestRunParameters>
     <Parameter name="organization" value="#{organization}#" />
     <Parameter name="pat" value="#{pat}#" />
+    <Parameter name="antidriftprojectguid" value="#{projectId}#" />
   </TestRunParameters>
 </RunSettings>

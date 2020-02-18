@@ -2,6 +2,7 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+name: $(Date:yyyy).$(Date:MM).$(Date:dd)$(Rev:.r)
 
 trigger:
 - master
@@ -21,10 +22,6 @@ variables:
   - group: Antidrift-Build
 
 steps:
-- task: GitVersion@5
-  inputs:
-    runtime: 'core'
-
 - task: replacetokens@3
   inputs:
     rootDirectory: 'src'
@@ -39,7 +36,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
-    arguments: --configuration $(buildConfiguration) -p:Version=$(Build.BuildNumber)
+    arguments: --configuration $(buildConfiguration)
     command: build
     workingDirectory: $(Build.SourcesDirectory)/src
 
