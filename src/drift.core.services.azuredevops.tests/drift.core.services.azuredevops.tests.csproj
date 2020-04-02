@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests</AssemblyName>
     <RootNamespace>Rangers.Antidrift.Drift.Core.Services.AzureDevOps.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
